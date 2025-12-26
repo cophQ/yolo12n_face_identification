@@ -1,17 +1,16 @@
-from ultralytics import YOLO
-import os
+from ultralytics.models.yolo import YOLO
+from config import BEST_MODEL_PATH, IMG_SIZE, ONNX_OPSET, ONNX_SIMPLIFY
 
 # 1. 加载模型
-MODEL_PATH = r"C:\Users\ASUS\PycharmProjects\YOLOv12\runs\detect\train4\weights\best.pt"
-model = YOLO(MODEL_PATH)
+model = YOLO(BEST_MODEL_PATH)
 
-# 2. 导出为 ONNX 格式（img sz 需与训练时一致，这里设为640）
+# 2. 导出为 ONNX 格式（img sz 需与训练时一致）
 export_results = model.export(
     format="onnx",
-    imgsz=640,
+    imgsz=IMG_SIZE,
     batch=1,  # 部署时通常用批量1
-    opset=12,  # ONNX算子集版本，兼容大多数框架（12是稳定版本）
-    simplify=True  # 简化ONNX模型，减小体积并提升推理速度
+    opset=ONNX_OPSET,  # ONNX算子集版本，兼容大多数框架
+    simplify=ONNX_SIMPLIFY,  # 简化ONNX模型，减小体积并提升推理速度
 )
 
 print(f"✅ ONNX模型导出完成！保存路径：{export_results}")

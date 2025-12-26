@@ -1,23 +1,20 @@
-from ultralytics import YOLO
-import os
-import numpy as np  # 导入numpy，用于数组处理（可选，若需要复杂操作）
+from ultralytics.models.yolo import YOLO
+from config import BEST_MODEL_PATH, DATA_YAML_PATH, CONF_THRESHOLD, IOU_THRESHOLD
 
-if __name__ == '__main__':
-    # 1. 加载模型（原有路径保持不变）
-    MODEL_PATH = r"C:\Users\ASUS\PycharmProjects\YOLOv12\runs\detect\train4\weights\best.pt"
-    DATA_YAML_PATH = r"D:\dataset\WIDER_FACE_YOLO\data.yaml"
-    model = YOLO(MODEL_PATH)
+if __name__ == "__main__":
+    # 1. 加载模型
+    model = YOLO(BEST_MODEL_PATH)
 
-    # 2. 执行全面评估（保留原有所有参数配置）
+    # 2. 执行全面评估
     metrics = model.val(
-        data=DATA_YAML_PATH,
+        data=str(DATA_YAML_PATH),
         imgsz=640,
         batch=2,
-        conf=0.5,
-        iou=0.5,
+        conf=CONF_THRESHOLD,
+        iou=IOU_THRESHOLD,
         save_json=False,
         save_conf=True,
-        save_txt=False
+        save_txt=False,
     )
 
     # 3. 处理数组类型指标，转换为标量后格式化输出
