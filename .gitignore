@@ -1,0 +1,34 @@
+# Virtual Environment
+.venv/
+venv/
+ENV/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Local Configuration (DO NOT COMMIT)
+config_local.py
+
+# Training Outputs
+runs/
+*.pt
+*.onnx
+
+# OS
+.DS_Store
+Thumbs.db
+.env
+.clinerules/
+# Data (optional - uncomment if you don't want to commit data)
+# WIDER_FACE_YOLO/

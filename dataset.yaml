@@ -1,5 +1,0 @@
-#dataset.yaml
-train: D:/dataset/WIDER_FACE_YOLO/images/train
-val: D:/dataset/WIDER_FACE_YOLO/images/val
-nc: 1
-names: ['face']
